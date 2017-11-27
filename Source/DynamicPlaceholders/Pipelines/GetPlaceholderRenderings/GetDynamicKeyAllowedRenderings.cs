@@ -14,7 +14,8 @@ namespace DynamicPlaceholders.Pipelines.GetPlaceholderRenderings
 		{
 			Assert.IsNotNull(args, "args");
 
-			var currentPlaceholderKey = args.PlaceholderKey;
+            var index = args.PlaceholderKey.LastIndexOf("/", System.StringComparison.Ordinal);
+            var currentPlaceholderKey = index > 0 ? args.PlaceholderKey.Substring(index) : args.PlaceholderKey;
 			var temporaryPlaceholderKey = string.Empty;
 			var regex = new Regex(DynamicPlaceholders.PlaceholderKeyRegex.DynamicKeyRegex);
 			var match = regex.Match(currentPlaceholderKey);
